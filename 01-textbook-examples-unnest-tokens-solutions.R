@@ -27,7 +27,7 @@ text_df %>%
 
 
 # Example two:
-## Try with a new example: https://poets.org/poem/just-say
+## Try with a new example: https://poets.org/poem/just-say 
 
 text <- c("I have eaten",
           "the plums",
@@ -43,5 +43,21 @@ text <- c("I have eaten",
           "and so cold")
 
 text
+
+##
+# to turn this text into tidy text data, first we put it into a data frame (tibble here)
+text_df <- tibble(line = 1:12, text = text)
+text_df
+
+# not quite done, We can’t filter out words or count which occur most frequently, 
+# since each row is made up of multiple combined words. 
+# We need to convert this so that it has one-token-per-document-per-row
+text_df %>%
+  unnest_tokens(word, text) %>% 
+  count(word, sort = TRUE)  %>%# next step is analysis but it makes slightly more sense here
+  ggplot(aes(x = reorder(word, -n), y = n)) +
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+
 
 # BONUS: how to visually display this? 
