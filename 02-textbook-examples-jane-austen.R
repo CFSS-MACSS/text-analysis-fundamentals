@@ -13,7 +13,7 @@ library(forcats)
 # https://github.com/juliasilge/janeaustenr
 
 # use austen_books() to return a tidy df 
-# use utate() to annotate a linenumber and chapter
+# use mutate() to annotate a linenumber and chapter
 original_books <- austen_books() %>%
   group_by(book) %>%
   mutate(linenumber = row_number(),
@@ -43,6 +43,7 @@ tidy_books %>%
   ggplot(aes(n, word)) +
   geom_col() +
   labs(y = NULL)
+  ggsave("austen.png", width = 4, height = 4, device = "png")
 
 # see the rest of Chapter 1 for more examples and more anayses
 # the code below comes from Chapter 3 and focuses on tf and tf-idf
@@ -106,7 +107,10 @@ book_tf_idf
 # now look at terms with high tf-idf by rearranging the previous results 
 book_tf_idf %>%
   select(-total) %>%
-  arrange(desc(tf_idf))
+  arrange(desc(tf_idf)) %>%
+  slice_head(n=10) %>%
+  knitr::kable() %>%
+  write.table("austen_bybooks")
 # notice those are proper nouns important to each of these novels:
 # none of them appear in all novels, and each is characteristic of a particular one
 
@@ -120,3 +124,5 @@ book_tf_idf %>%
   geom_col(show.legend = FALSE) +
   facet_wrap(~book, ncol = 2, scales = "free") +
   labs(x = "tf-idf", y = NULL)
+  ggsave("austen_bybook.png", device = "png")
+  
