@@ -206,7 +206,7 @@ Notice that quantifiers, like * or + or ?, apply to the character immediately to
 
 **PRACTICE 4.** Match all three emails in the following string:
 ```{r}
-email <- "smith90@uchicago.edu nardin@uchicago.edu happy2@uchicago.edu"
+email <- "smith90@uchicago.edu macss@uchicago.edu happy2@uchicago.edu"
 ```
 
 ```{r pratice4-solution}
