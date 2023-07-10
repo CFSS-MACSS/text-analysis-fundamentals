@@ -109,8 +109,7 @@ book_tf_idf %>%
   select(-total) %>%
   arrange(desc(tf_idf)) %>%
   slice_head(n=10) %>%
-  knitr::kable() %>%
-  write.table("austen_bybooks")
+  write_csv("austen_bybooks")
 # notice those are proper nouns important to each of these novels:
 # none of them appear in all novels, and each is characteristic of a particular one
 
