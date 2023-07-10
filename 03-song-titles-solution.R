@@ -64,4 +64,4 @@ pop_df <- pop_df %>%
 ## which are the top ten states by rate?
 pop_df %>%
   arrange(desc(rate)) %>%
-  top_n(10)
+  slice_head(n = 10)
